@@ -1,11 +1,6 @@
 import express from 'express';
-import https from 'https';
-import fs from 'fs';
-
 const app = express()
 const port = 3000;
-const portHTTPS = 433;
-
 import pkg from 'pg';
 const { Pool } = pkg;
 const pool = new Pool({
