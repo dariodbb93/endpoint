@@ -21,8 +21,8 @@ app.listen(port, () => {
 let array = [];
 const today = new Date();
 const oneWeekAgo = new Date(today);
-oneWeekAgo.setDate(today.getDate() - 7);  // Sottrai 7 giorni per ottenere una settimana fa
-const query = 'SELECT tramonto, MAX(temperatura) as temperatura_massima FROM previsioni WHERE tramonto > $1 GROUP BY tramonto ORDER BY tramonto';
+oneWeekAgo.setDate(today.getDate() - 7); 
+const query = 'SELECT tramonto, ROUND(AVG(temperatura)) as temperatura_media, MIN(temperatura) as temperatura_minima, MAX(temperatura) as temperatura_massima FROM previsioni WHERE tramonto > $1 GROUP BY tramonto ORDER BY tramonto';
 pool.query(query, [oneWeekAgo], (err, result) => {
     array.push(result.rows);
 });
