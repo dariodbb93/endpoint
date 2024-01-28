@@ -22,7 +22,7 @@ let array = [];
 const today = new Date();
 const oneWeekAgo = new Date(today);
 oneWeekAgo.setDate(today.getDate() - 7); 
-const query = 'SELECT tramonto, ROUND(AVG(temperatura)) as temperatura_media, MIN(temperatura) as temperatura_minima, MAX(temperatura) as temperatura_massima FROM previsioni WHERE tramonto > $1 GROUP BY tramonto ORDER BY tramonto';
+const query = 'SELECT tramonto, ROUND(AVG(temperatura)::numeric, 2) as temperatura_media, MIN(temperatura) as temperatura_minima, MAX(temperatura) as temperatura_massima FROM previsioni WHERE tramonto > $1 GROUP BY tramonto ORDER BY tramonto';
 pool.query(query, [oneWeekAgo], (err, result) => {
     array.push(result.rows);
 });
